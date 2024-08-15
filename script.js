@@ -1,6 +1,12 @@
 console.log("Hello World")
 let humanScore=0;
 let computerScore=0;
+let counter=0;
+const choice = document.querySelectorAll("button")
+const tablerow = document.querySelector("table")
+const humanChoiceValue = document.querySelector("#human")
+const computerChoiceValue = document.querySelector("#computer")
+const resultsText = document.querySelector(".container")
 
 function getComputerChoice() {
     options = ['rock', 'paper', 'scissors']
@@ -11,14 +17,9 @@ function getComputerChoice() {
     return computerChoice    
 }
 
-function getHumanChoice() {
-    let humanChoice = window.prompt("Enter any value: Rock, Paper, Scissors").toLowerCase()
-    return humanChoice
-}
-
 function playRound(humanChoice, computerChoice) {
-    console.log("Human choice:", humanChoice)
-    console.log("Computer choice:", computerChoice)
+    humanChoiceValue.textContent = `Your choice is: ${humanChoice}`;
+    computerChoiceValue.textContent = `Computer choice is: ${computerChoice}`;
     if(humanChoice == computerChoice)
         {console.log(`It's a tie !!! ${humanChoice} on both hands`)}
     else if ((humanChoice == "rock" && computerChoice == "scissors") ||  (humanChoice == "paper" && computerChoice == "rock") || (humanChoice == "scissors" && computerChoice == "paper")) {
@@ -28,25 +29,32 @@ function playRound(humanChoice, computerChoice) {
     else {
         console.log(`You lose! ${computerChoice} beats ${humanChoice}`)
         computerScore++
-    }     
+    }
+    if(counter == 5) {
+        let result;
+        const resultVal = document.createElement("div")
+        if(humanScore > computerScore) {
+            result = 'Human won!! :)'
+        } else {
+            result = 'Computer won! :('
+        }
+        resultVal.textContent = result;
+        resultsText.appendChild(resultVal);
+    } 
 }
 
-function playGame() {
-    let counter=0
-    while(counter<5) {
-        const computerSelection = getComputerChoice();
-        const humanSelection = getHumanChoice(); 
-        playRound(humanSelection, computerSelection);
+function createRow() {
+    document.querySelector("#humanscore").innerHTML = humanScore;
+    document.querySelector("#computerscore").innerHTML = computerScore;
+}
+
+choice.forEach((button) => {
+    button.addEventListener("click", (event) => {
         counter++
-    }
-    console.log('---------------One Round Completed-------------')
-    console.log('Human point ------------> ', humanScore)
-    console.log('Computer point ------------> ', computerScore)  
-    if(humanScore > computerScore) {
-        console.log('Human won!! :)')
-    } else {
-        console.log('Computer won! :(')
-    }
-}
-
-playGame();
+        let humanChoice = event.target.value
+        console.log(humanChoice);
+        let computerChoice = getComputerChoice();
+        playRound(humanChoice,computerChoice);
+        createRow();     
+    });
+});

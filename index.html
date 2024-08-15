@@ -5,7 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Pepper Scissor</title>
 </head>
+<style>
+    table, th, td {
+      border:1px solid black;
+    }
+    div {
+        padding-bottom: 20px;
+    }
+</style>
 <body>
-    <script src="script.js"></script>    
+    <div>
+        <h1>Select your choice to start the game</h1>
+        <button value="rock">ROCK</button>
+        <button value="paper">PAPER</button>
+        <button value="scissors">SCISSOR</button>
+    </div>
+    <div class="container">
+        <div id="human">Your choice is: </div>   
+        <div id="computer">Computer choice is: </div>      
+    </div>
+
+    <table style="width:50%">
+        <caption>Point Counter</caption>
+        <tr>
+          <td>Human point</td>
+          <td>Computer point</td>
+        </tr>
+        <tr>
+            <td id="humanscore">0</td>
+            <td id="computerscore">0</td>
+          </tr>
+      </table>
+    <script src="script.js"></script>  
 </body>
 </html>
